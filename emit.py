@@ -30,7 +30,7 @@ def ler_intermediario(intermediario):
     dic_palavras = {}
     with open(intermediario, 'r') as arquivo:
         for line in arquivo.readlines():
-            chave, valor = line.strip().split()
+            chave, valor = line.strip().split(maxsplit=1)
             if dic_palavras.get(chave) is not None:
                 dic_palavras[chave].append(valor)
             else:
@@ -45,10 +45,8 @@ def deletar_final(final):
 
 def emitir_final(chave, ocorrencias):
     final = './final'
-    lock.acquire()
     if not path.exists(final):
         open(final, 'w').close()
 
     with open(final, 'a') as arquivo:
         arquivo.write("{} {}\n".format(chave, ocorrencias))
-    lock.release()
