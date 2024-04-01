@@ -2,10 +2,31 @@ Equipe:
 - Davi de Morais Farias
 - Jose Igor Venancio de Albuquerque
 
-# Map Reduce: contar ocorrência de palavras
+# Grep MapReduce: buscar padroes de palavras
 
 Instruções:
 
-1. Execute o arquivo ***file_generator.py*** para criar alguns arquivos com palavras aleatórias
-2. Execute o arquivo ***threadingMap.py*** para ler cada arquivo criado no passo anterior, e gerar um arquivo ***intermediario*** com todas essas palavras e sua ocorrência. Uma thread para ler cada arquivo
-3. Execute o arquivo ***threadingReduce.py*** para ler o arquivo ***intermediario***, contar quantas vezes uma mesma palavra apareceu, e escrever em um arquivo ***final*** essas ocorrências. Uma thread para cada palavra que pode ou não ter se repetido.
+Para buscar em quantas linhas uma determinada palavra aparece, execute o arquivo como nos exemplos:
+```python
+python3 grep.py "ads"
+```
+```python
+python3 grep.py "foo"
+```
+```python
+python3 grep.py "asdf"
+```
+
+Para procurar padroes usando expressões regulares, use a opcao **-e**, como nos exemplos:
+
+```python
+python3 grep.py -e "foo$"
+```
+```python
+python3 grep.py -e "[a-z]{4}"
+```
+
+Buscar emails:
+```python
+python3 grep.py -e "^([a-zA-Z0-9_\-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([a-zA-Z0-9\-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})$"
+```
