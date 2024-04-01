@@ -1,9 +1,9 @@
 import argparse
 from sys import exit
 from concurrent.futures import ThreadPoolExecutor
-from os import listdir
+from os import listdir, path
 
-from MapReduce import Map, Reduce
+from MapReduce import Map, MapRegex, Reduce
 from emit import deletar_intermediario, deletar_final, ler_intermediario
 
 
@@ -28,10 +28,10 @@ if __name__ == "__main__":
         print("Nenhum padrao informado...")
         exit(1)
 
-    intermadiario = './intermediario'
+    intermediario = './intermediario'
     final = './final'
 
-    deletar_intermediario(intermadiario)
+    deletar_intermediario(intermediario)
     deletar_final(final)
 
 
@@ -39,15 +39,24 @@ if __name__ == "__main__":
     quantidade_arquivos = len(listdir(arquivos))
 
 
-    # Maximo de 10 threads:
+    if not path.exists(intermediario):
+        open(intermediario, 'w').close()
+
     with ThreadPoolExecutor(max_workers=10) as executor:
-        for index in range(quantidade_arquivos):
-            executor.submit(Map, f"arquivo{index}.txt", padrao_busca)
+        if not args.e:
+            for index in range(quantidade_arquivos):
+                executor.submit(Map, f"arquivo{index}.txt", padrao_busca)
+        else:
+            for index in range(quantidade_arquivos):
+                executor.submit(MapRegex, f"arquivo{index}.txt", padrao_busca)
 
 
 
-    dicionario = ler_intermediario(intermadiario)
-    # Maximo de 10 threads:
+    dicionario = ler_intermediario(intermediario)
+    
+    if not path.exists(final):
+        open(final, 'w').close()
+
     with ThreadPoolExecutor(max_workers=10) as executor: 
         for key in sorted(dicionario.keys()):
             executor.submit(Reduce, key, dicionario[key])

@@ -17,8 +17,8 @@ def emitir_intermediario(chave, ocorrencia):
         ocorrencia (char): o total de ocorrencias
     """
     intermediario = "./intermediario"
-    if not path.exists(intermediario):
-        open(intermediario, 'w').close()
+    # if not path.exists(intermediario):
+    #     open(intermediario, 'w').close()
 
     lock.acquire()
     with open(intermediario, "a") as arquivo:
@@ -45,8 +45,8 @@ def deletar_final(final):
 
 def emitir_final(chave, ocorrencias):
     final = './final'
-    if not path.exists(final):
-        open(final, 'w').close()
+    # if not path.exists(final):
+    #     open(final, 'w').close()
 
     with open(final, 'a') as arquivo:
         arquivo.write("{} {}\n".format(chave, ocorrencias))

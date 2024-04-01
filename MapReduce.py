@@ -11,6 +11,11 @@ def Map(key, padrao):
             if padrao in line:
                 emitir_intermediario(key, line.strip())
 
+def MapRegex(key, padrao):
+    with open(f"./arquivos/{key}", 'r') as arquivo:
+        for line in arquivo.readlines():
+            if (search(padrao, line)):
+                emitir_intermediario(key, line.strip())
 
 def Reduce(chave, ocorrencia):
     lock.acquire()
