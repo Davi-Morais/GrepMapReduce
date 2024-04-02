@@ -35,8 +35,8 @@ if __name__ == "__main__":
     deletar_final(final)
 
 
-    arquivos = './arquivos'
-    quantidade_arquivos = len(listdir(arquivos))
+    dir_arquivos = './arquivos'
+    quantidade_arquivos = len(listdir(dir_arquivos))
 
 
     if not path.exists(intermediario):
@@ -45,10 +45,10 @@ if __name__ == "__main__":
     with ThreadPoolExecutor(max_workers=10) as executor:
         if not args.e:
             for index in range(quantidade_arquivos):
-                executor.submit(Map, f"arquivo{index}.txt", padrao_busca)
+                executor.submit(Map, f"input{index}", padrao_busca)
         else:
             for index in range(quantidade_arquivos):
-                executor.submit(MapRegex, f"arquivo{index}.txt", padrao_busca)
+                executor.submit(MapRegex, f"input{index}", padrao_busca)
 
 
 
