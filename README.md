@@ -8,25 +8,27 @@ Instruções:
 
 Para buscar em quantas linhas uma determinada palavra aparece, execute o arquivo como nos exemplos:
 ```python
-python3 grep.py "ads"
+python3 grep.py  "bed"
 ```
 ```python
-python3 grep.py "foo"
+python3 grep.py "fffff"
 ```
 ```python
-python3 grep.py "asdf"
+python3 grep.py "abcde"
 ```
 
 Para procurar padroes usando expressões regulares, use a opcao **-e**, como nos exemplos:
 
-```python
-python3 grep.py -e "foo$"
-```
+Letras minúsculas sequenciais:
 ```python
 python3 grep.py -e "[a-z]{4}"
 ```
 
 Buscar emails:
 ```python
-python3 grep.py -e "^([a-zA-Z0-9_\-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([a-zA-Z0-9\-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})$"
+python3 grep.py -e "[\w\-.]+@[\w\-]+\.\w+\.?\w*"
+```
+Buscar cpf:
+```python
+python3 grep.py -e "([0-9]{2}[\.]?[0-9]{3}[\.]?[0-9]{3}[\/]?[0-9]{4}[-]?[0-9]{2})|([0-9]{3}[\.]?[0-9]{3}[\.]?[0-9]{3}[-]?[0-9]{2})"
 ```
